@@ -1,0 +1,17 @@
+-- CreateTable
+CREATE TABLE `Report` (
+    `id` INTEGER NOT NULL AUTO_INCREMENT,
+    `blogId` INTEGER NOT NULL,
+    `userId` INTEGER NULL,
+    `reason` ENUM('RUDE', 'SEXUAL', 'VIOLENT', 'THREATEN') NOT NULL,
+    `details` TEXT NULL,
+    `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
+
+    PRIMARY KEY (`id`)
+) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+-- AddForeignKey
+ALTER TABLE `Report` ADD CONSTRAINT `Report_blogId_fkey` FOREIGN KEY (`blogId`) REFERENCES `Blog`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE `Report` ADD CONSTRAINT `Report_userId_fkey` FOREIGN KEY (`userId`) REFERENCES `User`(`id`) ON DELETE SET NULL ON UPDATE CASCADE;

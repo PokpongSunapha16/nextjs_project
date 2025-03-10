@@ -1,0 +1,15 @@
+-- AlterTable
+ALTER TABLE `user` MODIFY `status` ENUM('ACTIVE', 'BUSY', 'OFFLINE', 'INACTIVE') NOT NULL DEFAULT 'OFFLINE';
+
+-- CreateTable
+CREATE TABLE `Gallery` (
+    `id` INTEGER NOT NULL AUTO_INCREMENT,
+    `user_id` INTEGER NOT NULL,
+    `image` LONGTEXT NOT NULL,
+    `upload_at` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
+
+    PRIMARY KEY (`id`)
+) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+-- AddForeignKey
+ALTER TABLE `Gallery` ADD CONSTRAINT `Gallery_user_id_fkey` FOREIGN KEY (`user_id`) REFERENCES `User`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
